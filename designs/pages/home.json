@@ -1,0 +1,86 @@
+[
+    {
+        "id": "sd_ARBe4Gnr2VKIkBxr",
+        "type": "tab",
+        "createdDate": "2024-02-22T15:45:14.763Z",
+        "label": "home",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_qlSvWnYS3KMMNfNb",
+        "type": "OnInit",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "functionName": "sd_qlSvWnYS3KMMNfNb",
+        "category": "Lifecycle Events",
+        "x": 85,
+        "y": 80,
+        "wires": [
+            [
+                "sd_3yTyYfJGGxD7ajsZ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_3yTyYfJGGxD7ajsZ",
+        "type": "PageVariables",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "location",
+                "typedIpValue": {
+                    "type": "bh",
+                    "value": ""
+                }
+            }
+        ],
+        "functionName": "sd_3yTyYfJGGxD7ajsZ",
+        "category": "Function",
+        "x": 185,
+        "y": 80,
+        "wires": [
+            [
+                "sd_lHgJp97nb9Oa4rNc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_lHgJp97nb9Oa4rNc",
+        "type": "Script",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "if (navigator.geolocation) {\n    navigator.geolocation.getCurrentPosition(\n        position => {\n            page.location = {\n                latitude: position.coords.latitude,\n                longitude: position.coords.longitude,\n                timestamp: Date.now(),\n                message: `Latitude: ${position.coords.latitude} <br> Longitude: ${position.coords.longitude}`\n            };\n        },\n        error => {\n            bh.result = error;\n            console.error(\"Error getting location\", error);\n        }\n    );\n} else {\n    console.error(\"Geolocation is not supported by this browser.\");\n}",
+        "functionName": "sd_lHgJp97nb9Oa4rNc",
+        "category": "Function",
+        "x": 305,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    }
+]
