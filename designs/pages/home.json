@@ -69,15 +69,270 @@
         "z": "sd_ARBe4Gnr2VKIkBxr",
         "viewType": "common",
         "nodeType": "flow",
-        "name": "",
-        "script": "if (navigator.geolocation) {\n    navigator.geolocation.getCurrentPosition(\n        position => {\n            page.location = {\n                latitude: position.coords.latitude,\n                longitude: position.coords.longitude,\n                timestamp: Date.now(),\n                message: `Latitude: ${position.coords.latitude} <br> Longitude: ${position.coords.longitude}`\n            };\n        },\n        error => {\n            bh.result = error;\n            console.error(\"Error getting location\", error);\n        }\n    );\n} else {\n    console.error(\"Geolocation is not supported by this browser.\");\n}",
-        "functionName": "sd_lHgJp97nb9Oa4rNc",
+        "name": "request location",
+        "script": "if (navigator.geolocation) {\n    navigator.geolocation.getCurrentPosition(\n        position => {\n            page.location = {\n                latitude: position.coords.latitude,\n                longitude: position.coords.longitude,\n                timestamp: Date.now()\n            };\n            this.sendLocation(page.location)\n        },\n        error => {\n            bh.result = error;\n            console.error(\"Error getting location\", error);\n        }\n    );\n} else {\n    console.error(\"Geolocation is not supported by this browser.\");\n}",
+        "functionName": "requestLocation",
         "category": "Function",
         "x": 305,
         "y": 80,
         "wires": [
+            [
+                "sd_rQvIjcZwKcV0HGBo"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_caiGzSK0KdIbzTTu",
+        "type": "HttpRequest",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "method": "post",
+        "methodMappingObj": {},
+        "urlMapping": "bh.ssdURL",
+        "urlMappingObj": {
+            "mapVarType": "bh",
+            "mapVarValue": "ssdURL"
+        },
+        "ret": "json",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": false,
+        "reqBody": "bh.payload",
+        "reqBodyObj": {
+            "mapVarType": "bh",
+            "mapVarValue": "payload"
+        },
+        "resultMapping": "bh.results",
+        "resultMappingObj": {
+            "mapVarType": "bh",
+            "mapVarValue": "results"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMappingObj": {},
+        "functionName": "sd_caiGzSK0KdIbzTTu",
+        "category": "HTTP",
+        "x": 405,
+        "y": 200,
+        "wires": [
             []
         ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_fJO2x4vjOEh1PVKd",
+        "type": "PageStart",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "sendLocation",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "location",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "sendLocation",
+        "category": "General",
+        "x": 85,
+        "y": 200,
+        "wires": [
+            [
+                "sd_1LTsAEh404sBHdSg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_1LTsAEh404sBHdSg",
+        "type": "Environment",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "envMaps": [
+            {
+                "flowVar": {
+                    "type": "bh",
+                    "value": "ssdURL"
+                },
+                "envProperty": "ssdURL"
+            }
+        ],
+        "functionName": "sd_1LTsAEh404sBHdSg",
+        "category": "General",
+        "x": 185,
+        "y": 200,
+        "wires": [
+            [
+                "sd_pBjTeuR1NSl6Wpvq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_pBjTeuR1NSl6Wpvq",
+        "type": "Script",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update endpoint",
+        "script": "bh.ssdURL = bh.ssdURL + 'add-location';\n\nbh.payload = {\n    ...page.user,\n    ...bh.input.location\n}",
+        "functionName": "updateEndpoint",
+        "category": "Function",
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "sd_caiGzSK0KdIbzTTu",
+                "sd_W9E2fZi3w8tV1a7R"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_rQvIjcZwKcV0HGBo",
+        "type": "Storage",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "get user",
+        "operationType": "getItem",
+        "storageType": "localStorage",
+        "outputs": 1,
+        "key": {
+            "type": "str",
+            "value": "user"
+        },
+        "value": {},
+        "resultMapping": {
+            "type": "this.page",
+            "value": "user"
+        },
+        "functionName": "getUser",
+        "category": "Storage",
+        "x": 425,
+        "y": 80,
+        "wires": [
+            [
+                "sd_TWvJI1Jtn2JDrnpo"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_TWvJI1Jtn2JDrnpo",
+        "type": "PageSwitch",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "check if user exist",
+        "property": "user",
+        "propertyType": "this.page",
+        "propertyGv": "this.page.user",
+        "rules": [
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "functionName": "checkIfUserExist",
+        "category": "Function",
+        "x": 540,
+        "y": 80,
+        "wires": [
+            [
+                "sd_9LpFOxrT7Bv6cdh6"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_9LpFOxrT7Bv6cdh6",
+        "type": "Navigation",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "if not - go to register",
+        "path": "/register",
+        "pathMap": "",
+        "pathparams": "",
+        "pathparamsMap": "",
+        "qparams": "",
+        "qparamsMap": "",
+        "qparamsArray": "",
+        "resultMapping": "",
+        "functionName": "ifNotGoToRegister",
+        "category": "Navigation",
+        "x": 660,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "homeComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_W9E2fZi3w8tV1a7R",
+        "type": "Log",
+        "z": "sd_ARBe4Gnr2VKIkBxr",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.payload",
+        "functionName": "sd_W9E2fZi3w8tV1a7R",
+        "category": "General",
+        "x": 320,
+        "y": 300,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh",
+                "value": "payload",
+                "constant": false
+            }
+        },
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "homeComponent",

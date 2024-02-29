@@ -16,6 +16,8 @@ window['neutrinos'] = {
 };
 
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-registerComponent
+import { registerComponent } from '../components/register.component';
 //CORE_REFERENCE_IMPORT-homeComponent
 import { homeComponent } from '../components/home.component';
 
@@ -27,11 +29,13 @@ import { homeComponent } from '../components/home.component';
 export function startupServiceFactory(startupService: NDataSourceService) {
   return () => {
     return new Promise((resolve, reject) => {
-      startupService.getDataSource().then(() => {
-        localesService.init().then(() => {
-          resolve(null);
-        });
-      });
+      resolve(null);
+
+      // startupService.getDataSource().then(() => {
+      //   localesService.init().then(() => {
+      //     resolve(null);
+      //   });
+      // });
     });
   };
 }
@@ -50,6 +54,8 @@ export const appDeclarations = [
   PageNotFoundComponent,
   ArtImgSrcDirective,
   //CORE_REFERENCE_PUSH_TO_DEC_ARRAY
+  //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-registerComponent
+  registerComponent,
   //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-homeComponent
   homeComponent,
 ];
@@ -78,6 +84,7 @@ export const appProviders = [
 // CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY_START
 export const appRoutes = [
   { path: 'home', component: homeComponent },
+  { path: 'register', component: registerComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

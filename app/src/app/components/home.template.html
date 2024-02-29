@@ -1,7 +1,32 @@
-<h1>
-  Latitude: {{page.location?.latitude}}</h1>
-<h1>
-  Longitude: {{page.location?.longitude}}
-</h1>
-<h1>
-  Timestamp: {{page.location?.timestamp}}</h1>
+<div fxLayout="column wrap" class="full-height" fxLayoutAlign="start stretch" [fxShow]="true"><mat-toolbar color="primary">
+    <h2>
+      VALOR</h2>
+  </mat-toolbar>
+  <div fxLayout="row wrap" fxLayoutAlign="center stretch" [fxShow]="true">
+    <h2>
+      Welcome to the Valor App</h2>
+  </div>
+  <div fxLayout="row wrap" class="flex-1" fxLayoutAlign="center stretch" [fxShow]="true">
+    <div fxLayout="column wrap" fxFlex="80" fxLayoutAlign="start stretch" [fxShow]="true"><mat-card>
+        <mat-card-title>Hello, Tukiso Mateka</mat-card-title>
+
+        <mat-card-subtitle>Here are the details we received</mat-card-subtitle>
+
+        <mat-card-content>
+          <div>
+            <hr>
+          </div>
+          <p>
+            Timestamp: {{page.location?.timestamp}}</p>
+          <p>
+            Longitude: {{page.location?.longitude}}
+          </p>
+          <p>
+            Latitude: {{page.location?.latitude}}</p>
+          <div>
+            <hr>
+          </div>
+        </mat-card-content>
+      </mat-card></div>
+  </div>
+</div>

@@ -5,6 +5,10 @@
             "path": "home"
         },
         {
+            "path": "register",
+            "component": "registerComponent"
+        },
+        {
             "path": "''",
             "redirectTo": "/home",
             "pathMatch": "full",

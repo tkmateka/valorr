@@ -2,7 +2,7 @@ export const environment = {
     "name": "prod",
     "properties": {
         "production": true,
-        "ssdURL": "http://localhost:8081/api/",
+        "ssdURL": "https://us-central1-eaziride-406911.cloudfunctions.net/api/",
         "tenantName": "neutrinos-delivery",
         "appName": "valorr",
         "namespace": "com.neutrinos-delivery.valorr",

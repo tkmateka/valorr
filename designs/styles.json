@@ -1,1 +1,7 @@
-{"classes":[]}
+{
+    "classes": [
+        "full-height",
+        "full-width",
+        "flex-1"
+    ]
+}

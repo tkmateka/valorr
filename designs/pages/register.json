@@ -1,0 +1,150 @@
+[
+    {
+        "id": "sd_ZvZlWqVxZLYaZLQq",
+        "type": "tab",
+        "createdDate": "2024-02-28T10:28:15.414Z",
+        "label": "register",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "registerComponent"
+    },
+    {
+        "id": "sd_n0qcTJs9Nz2PQNp5",
+        "type": "OnInit",
+        "z": "sd_ZvZlWqVxZLYaZLQq",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "functionName": "sd_n0qcTJs9Nz2PQNp5",
+        "category": "Lifecycle Events",
+        "x": 65,
+        "y": 80,
+        "wires": [
+            [
+                "sd_hJ3n1L6IbYEBDLUY"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "registerComponent"
+    },
+    {
+        "id": "sd_hJ3n1L6IbYEBDLUY",
+        "type": "PageVariables",
+        "z": "sd_ZvZlWqVxZLYaZLQq",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "user",
+                "typedIpValue": {
+                    "type": "literal",
+                    "value": "{firstName:'',lastName:'',email:''}"
+                }
+            }
+        ],
+        "functionName": "sd_hJ3n1L6IbYEBDLUY",
+        "category": "Function",
+        "x": 205,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "registerComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_Bc0KSakN7WDzaQaq",
+        "type": "PageStart",
+        "z": "sd_ZvZlWqVxZLYaZLQq",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "submit",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "form",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "submit",
+        "category": "General",
+        "x": 65,
+        "y": 220,
+        "wires": [
+            [
+                "sd_jcMMImTohU1KAzqN"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "registerComponent"
+    },
+    {
+        "id": "sd_jcMMImTohU1KAzqN",
+        "type": "Storage",
+        "z": "sd_ZvZlWqVxZLYaZLQq",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "store user",
+        "operationType": "setItem",
+        "storageType": "localStorage",
+        "outputs": 1,
+        "key": {
+            "type": "str",
+            "value": "user"
+        },
+        "value": {
+            "type": "this.page",
+            "value": "user"
+        },
+        "resultMapping": {},
+        "functionName": "storeUser",
+        "category": "Storage",
+        "x": 185,
+        "y": 220,
+        "wires": [
+            [
+                "sd_p4fz9VjPysZCkxse"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "registerComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_p4fz9VjPysZCkxse",
+        "type": "Navigation",
+        "z": "sd_ZvZlWqVxZLYaZLQq",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "go home",
+        "path": "/home",
+        "functionName": "goHome",
+        "category": "Navigation",
+        "x": 300,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "registerComponent",
+        "generated": true
+    }
+]

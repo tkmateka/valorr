@@ -4,6 +4,7 @@
 //append_imports_start
 
 import { Component, Injector } from '@angular/core'; //_splitter_
+import { Router } from '@angular/router'; //_splitter_
 import { SDPageCommonService } from 'app/n-services/sd-page-common.service'; //_splitter_
 import { SDBaseService } from 'app/n-services/SDBaseService'; //_splitter_
 import { NeuServiceInvokerService } from 'app/n-services/service-caller.service'; //_splitter_
@@ -55,12 +56,26 @@ export class homeComponent {
     }
   }
 
+  sendLocation(location: any = undefined, ...others) {
+    let bh: any = {};
+    try {
+      bh = this.__page_injector__
+        .get(SDPageCommonService)
+        .constructFlowObject(this);
+      bh.input = { location };
+      bh.local = {};
+      bh = this.sd_1LTsAEh404sBHdSg(bh);
+      //appendnew_next_sendLocation
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_fJO2x4vjOEh1PVKd');
+    }
+  }
   //appendnew_flow_homeComponent_start
 
   sd_3yTyYfJGGxD7ajsZ(bh) {
     try {
       this.page.location = undefined;
-      bh = this.sd_lHgJp97nb9Oa4rNc(bh);
+      bh = this.requestLocation(bh);
       //appendnew_next_sd_3yTyYfJGGxD7ajsZ
       return bh;
     } catch (e) {
@@ -68,7 +83,7 @@ export class homeComponent {
     }
   }
 
-  sd_lHgJp97nb9Oa4rNc(bh) {
+  requestLocation(bh) {
     try {
       const page = this.page;
       if (navigator.geolocation) {
@@ -78,8 +93,8 @@ export class homeComponent {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
               timestamp: Date.now(),
-              message: `Latitude: ${position.coords.latitude} <br> Longitude: ${position.coords.longitude}`,
             };
+            this.sendLocation(page.location);
           },
           (error) => {
             bh.result = error;
@@ -89,10 +104,114 @@ export class homeComponent {
       } else {
         console.error('Geolocation is not supported by this browser.');
       }
-      //appendnew_next_sd_lHgJp97nb9Oa4rNc
+      bh = this.getUser(bh);
+      //appendnew_next_requestLocation
       return bh;
     } catch (e) {
       return this.errorHandler(bh, e, 'sd_lHgJp97nb9Oa4rNc');
+    }
+  }
+
+  getUser(bh) {
+    try {
+      this.page.user = JSON.parse(localStorage.getItem('user'));
+      bh = this.checkIfUserExist(bh);
+      //appendnew_next_getUser
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_rQvIjcZwKcV0HGBo');
+    }
+  }
+
+  checkIfUserExist(bh) {
+    try {
+      if (
+        this.sdService.operators['null'](
+          this.page.user,
+          undefined,
+          undefined,
+          undefined
+        )
+      ) {
+        bh = this.ifNotGoToRegister(bh);
+      }
+
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_TWvJI1Jtn2JDrnpo');
+    }
+  }
+
+  async ifNotGoToRegister(bh) {
+    try {
+      const { paramObj: qprm, path: path } =
+        this.sdService.getPathAndQParamsObj('/register');
+      await this.__page_injector__
+        .get(Router)
+        .navigate([this.sdService.formatPathWithParams(path, undefined)], {
+          queryParams: Object.assign(qprm, ''),
+        });
+      //appendnew_next_ifNotGoToRegister
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_9LpFOxrT7Bv6cdh6');
+    }
+  }
+
+  sd_1LTsAEh404sBHdSg(bh) {
+    try {
+      bh.ssdURL = bh.system.environment.properties.ssdURL;
+      bh = this.updateEndpoint(bh);
+      //appendnew_next_sd_1LTsAEh404sBHdSg
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_1LTsAEh404sBHdSg');
+    }
+  }
+
+  updateEndpoint(bh) {
+    try {
+      const page = this.page;
+      bh.ssdURL = bh.ssdURL + 'add-location';
+
+      bh.payload = {
+        ...page.user,
+        ...bh.input.location,
+      };
+      bh = this.sd_caiGzSK0KdIbzTTu(bh);
+      this.sd_W9E2fZi3w8tV1a7R(bh);
+      //appendnew_next_updateEndpoint
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_pBjTeuR1NSl6Wpvq');
+    }
+  }
+
+  async sd_caiGzSK0KdIbzTTu(bh) {
+    try {
+      let requestOptions = {
+        url: bh.ssdURL,
+        method: 'post',
+        responseType: 'json',
+        headers: {},
+        params: {},
+        body: bh.payload,
+      };
+      bh.results = await this.sdService.nHttpRequest(requestOptions);
+      //appendnew_next_sd_caiGzSK0KdIbzTTu
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_caiGzSK0KdIbzTTu');
+    }
+  }
+
+  sd_W9E2fZi3w8tV1a7R(bh) {
+    try {
+      console.log(new Date().toLocaleTimeString(), bh.payload);
+      //appendnew_next_sd_W9E2fZi3w8tV1a7R
+      return bh;
+    } catch (e) {
+      return this.errorHandler(bh, e, 'sd_W9E2fZi3w8tV1a7R');
     }
   }
 

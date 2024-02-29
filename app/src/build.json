@@ -1,0 +1,11 @@
+{
+    "android": {
+        "release": {
+            "keystore": "my-release-key.keystore",
+            "storePassword": "valorr",
+            "alias": "alias_name",
+            "password" : "valorr",
+            "keystoreType": ""
+        }
+    }
+}
